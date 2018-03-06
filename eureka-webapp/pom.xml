@@ -2,18 +2,49 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eurekaclinical</groupId>
 	<artifactId>eureka-webapp</artifactId>
+	<version>3.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Eureka WebApp</name>
 	<description>Eureka WebApp is the implementation 
 		of the Eureka! Clinical Analytics web user interface.
 	</description>
-
+<!-- 	<url>https://github.com/eurekaclinical/eureka.git</url>  -->
+	<inceptionYear>2012</inceptionYear>
 	<parent>
 		<groupId>org.eurekaclinical</groupId>
-		<artifactId>eureka</artifactId>
-		<version>3.1-SNAPSHOT</version>
+		<artifactId>eurekaclinical-parent-standard-deps</artifactId>
+		<version>2</version>
 	</parent>
+<!-- 	<parent> -->
+<!-- 		<groupId>org.eurekaclinical</groupId> -->
+<!-- 		<artifactId>eureka</artifactId> -->
+<!-- 		<version>3.1-SNAPSHOT</version> -->
+<!-- 	</parent> -->
+	<scm>
+		<developerConnection>scm:git:https://github.com/eurekaclinical/eureka.git</developerConnection>
+		<connection>scm:git:https://github.com/eurekaclinical/eureka.git</connection>
+		<url>https://github.com/eurekaclinical/eureka.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/eurekaclinical/eureka/issues</url>
+	</issueManagement>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<distribution>manual</distribution>
+		</license>
+		<license>
+			<name>GNU General Public License, Version 3</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0-standalone.html</url>
+			<distribution>manual</distribution>
+		</license>
+	</licenses>
 
 	<properties>
 		<tomcat.port>8080</tomcat.port>
@@ -37,6 +68,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+		        <configuration>
+		          <source>1.8</source>
+		          <target>1.8</target>
+		        </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -52,6 +88,35 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
+				<configuration>
+					<licenseName>apache2_gpl3</licenseName>
+					<licenseResolver>file:src/license</licenseResolver>
+					<roots>
+						<root>src/main</root>
+						<root>src/test/java/</root>
+					</roots>
+					<extraExtensions>
+						<!-- .xsd files are not supported by default -->
+						<!-- but should be commented in XML style -->
+						<xsd>xml</xsd>
+					</extraExtensions>
+					<excludes>
+						<exclude>**/*.htm</exclude>
+						<exclude>**/*.html</exclude>
+						<exclude>**/*.js</exclude>
+						<exclude>**/*.css</exclude>
+						<exclude>**/*.json</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>first</id>
+						<goals>
+							<goal>update-file-header</goal>
+						</goals>
+						<phase>process-sources</phase>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -137,24 +202,29 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
+			<version>3.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eurekaclinical</groupId>
 			<artifactId>protempa-framework</artifactId>
+			<version>4.0</version>
 		</dependency>
 				<dependency>
 			<groupId>org.eurekaclinical</groupId>
 			<artifactId>eureka-client</artifactId>
+			<version>3.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eurekaclinical</groupId>
 			<artifactId>eurekaclinical-user-client</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eurekaclinical</groupId>
 			<artifactId>eurekaclinical-registry-client</artifactId>
+			<version>1.0</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>org.jasig.cas.client</groupId>
 			<artifactId>cas-client-core</artifactId>
 		</dependency>

@@ -3,24 +3,56 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>eureka-services</artifactId>
+	<version>3.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Eureka Services</name>
 	<description>Eureka Services is the middle services layer
 		of the Eureka! Clinical Analytics application.
 	</description>
-
+<!-- 	<url>https://github.com/eurekaclinical/eureka.git</url> -->
+	<inceptionYear>2012</inceptionYear>
 	<parent>
 		<groupId>org.eurekaclinical</groupId>
-		<artifactId>eureka</artifactId>
-		<version>3.1-SNAPSHOT</version>
+		<artifactId>eurekaclinical-parent-standard-deps</artifactId>
+		<version>2</version>
 	</parent>
+	<scm>
+		<developerConnection>scm:git:https://github.com/eurekaclinical/eureka.git</developerConnection>
+		<connection>scm:git:https://github.com/eurekaclinical/eureka.git</connection>
+		<url>https://github.com/eurekaclinical/eureka.git</url>
+		<tag>HEAD</tag>
+	</scm>
 
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/eurekaclinical/eureka/issues</url>
+	</issueManagement>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<distribution>manual</distribution>
+		</license>
+		<license>
+			<name>GNU General Public License, Version 3</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0-standalone.html</url>
+			<distribution>manual</distribution>
+		</license>
+	</licenses>
+	<properties>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+</properties>
 	<build>
 		<finalName>eureka-services</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+		        <configuration>
+		          <source>1.8</source>
+		          <target>1.8</target>
+		        </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
@@ -29,10 +61,117 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-context.xml</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/tomcat-config</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/resources/tomcat-server-config</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>context.xml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-cert</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/tomcat-config</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/resources/tomcat-server-config</directory>
+									<filtering>false</filtering>
+									<includes>
+										<include>localhost.keystore</include>
+										<include>localhost.truststore</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-logging.properties-file</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/eureka-config</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/resources/tomcat-eureka-config</directory>
+									<includes>
+										<include>logging.properties</include>
+									</includes>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-application.properties-file</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/eureka-config/eureka</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/resources/tomcat-eureka-config/eureka</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
+				<configuration>
+					<licenseName>apache2_gpl3</licenseName>
+					<licenseResolver>file:src/license</licenseResolver>
+					<roots>
+						<root>src/main</root>
+						<root>src/test/java/</root>
+					</roots>
+					<extraExtensions>
+						<!-- .xsd files are not supported by default -->
+						<!-- but should be commented in XML style -->
+						<xsd>xml</xsd>
+					</extraExtensions>
+					<excludes>
+						<exclude>**/*.htm</exclude>
+						<exclude>**/*.html</exclude>
+						<exclude>**/*.js</exclude>
+						<exclude>**/*.css</exclude>
+						<exclude>**/*.json</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>first</id>
+						<goals>
+							<goal>update-file-header</goal>
+						</goals>
+						<phase>process-sources</phase>
+					</execution>
+				</executions>
+			
 			</plugin>
 			<plugin>
 				<groupId>org.jasig.maven</groupId>
@@ -126,6 +265,7 @@
 		<dependency>
 			<groupId>org.eurekaclinical</groupId>
 			<artifactId>protempa-framework</artifactId>
+			<version>4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.mail</groupId>
@@ -135,6 +275,7 @@
 				<dependency>
 			<groupId>org.eurekaclinical</groupId>
 			<artifactId>eureka-client</artifactId>
+			<version>3.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -147,7 +288,6 @@
 <dependency>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-lang3</artifactId>
-    <version>3.4</version>
 </dependency>
 		<dependency>
 			<groupId>org.jasig.cas.client</groupId>
