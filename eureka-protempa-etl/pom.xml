@@ -20,6 +20,7 @@
 		<version>2</version>
 	</parent>
 	<properties>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
 	<eurekaclinical-ontology-version>2.0</eurekaclinical-ontology-version>
 	</properties>
 	<build>
@@ -74,6 +75,28 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.9</version>
+                <configuration>
+                    <licenseName>apache_v2</licenseName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                        <configuration>
+                        <includes>
+                        <include>*.json</include>
+                        </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>

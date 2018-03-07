@@ -26,13 +26,14 @@ This project includes:
   Apache FreeMarker under Apache License, Version 2.0
   Apache POI under The Apache Software License, Version 2.0
   Commons IO under The Apache Software License, Version 2.0
+  Commons Logging under The Apache Software License, Version 2.0
   ConcurrentLinkedHashMap under The Apache Software License, Version 2.0
   Core Hibernate O/RM functionality under GNU Lesser General Public License
   Data Mapper for Jackson under The Apache Software License, Version 2.0
   Datastore under Apache License, Version 2.0
   dom4j under BSD License
   Drools :: Rete-OO Core under The Apache Software License, Version 2.0
-  Eureka Protempa ETL under Apache License, Version 2.0 or GNU General Public License, Version 3
+  Eureka Protempa ETL under Apache License, Version 2.0
   Eureka Services under Apache License, Version 2.0 or GNU General Public License, Version 3
   Eureka WebApp under Apache License, Version 2.0 or GNU General Public License, Version 3
   Eureka! Client under Apache License, Version 2.0
@@ -92,7 +93,6 @@ This project includes:
   jsr311-api under CDDL License
   JTA 1.1 under The Apache Software License, Version 2.0
   JUnit under Eclipse Public License 1.0
-  Logging under The Apache Software License, Version 2.0
   Lucene Core under Apache 2
   MIME streaming extension under CDDL 1.1 or GPL2 w/ CPE
   mvel under The Apache Software License, Version 2.0
