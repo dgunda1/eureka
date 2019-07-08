@@ -71,6 +71,7 @@
 		
 		<ec-registry-client-version>1.0</ec-registry-client-version>
 		<ec-registry-service-version>1.0</ec-registry-service-version>
+		<tomcat.port>8082</tomcat.port>
 	</properties>
 
 	<licenses>
@@ -86,11 +87,11 @@
 		</license>
 	</licenses>
 
-	<modules>
-		<module>eureka-webapp</module>
-		<module>eureka-services</module>
-		<module>eureka-protempa-etl</module>
-	</modules>
+<!-- 	<modules> -->
+<!-- 		<module>eureka-webapp</module> -->
+<!-- 		<module>eureka-services</module> -->
+<!-- 		<module>eureka-protempa-etl</module> -->
+<!-- 	</modules> -->
 
 	<!-- make sure our code complies with Java 1.6 specifications, and define
 	the name of the WAR file to create -->
@@ -400,6 +401,7 @@
 						<groupId>org.jasig.cas.client</groupId>
 						<artifactId>cas-client-core</artifactId>
 						<version>${cas-client-version}</version>
+						<scope>compile</scope>
 						<exclusions>
 							<exclusion>
 								<groupId>javax.servlet</groupId>
@@ -430,27 +432,27 @@
 						<java.util.logging.config.file>${project.build.directory}/eureka-config/logging.properties</java.util.logging.config.file>
 					</systemProperties>
 					<webapps>
-						<webapp>
-							<groupId>org.eurekaclinical</groupId>
-							<artifactId>eureka-webapp</artifactId>
-							<version>${project.version}</version>
-							<type>war</type>
-							<asWebapp>true</asWebapp>
-						</webapp>
-						<webapp>
-							<groupId>org.eurekaclinical</groupId>
-							<artifactId>eureka-services</artifactId>
-							<version>${project.version}</version>
-							<type>war</type>
-							<asWebapp>true</asWebapp>
-						</webapp>
-						<webapp>
-							<groupId>org.eurekaclinical</groupId>
-							<artifactId>eureka-protempa-etl</artifactId>
-							<version>${project.version}</version>
-							<type>war</type>
-							<asWebapp>true</asWebapp>
-						</webapp>
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>eureka-webapp</artifactId> -->
+<!-- 							<version>${project.version}</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp> -->
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>eureka-services</artifactId> -->
+<!-- 							<version>${project.version}</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp> -->
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>eureka-protempa-etl</artifactId> -->
+<!-- 							<version>${project.version}</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp> -->
 						<webapp>
 							<groupId>org.eurekaclinical</groupId>
 							<artifactId>cas-server</artifactId>

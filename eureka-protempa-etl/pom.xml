@@ -35,9 +35,115 @@
 		          <target>1.8</target>
 		        </configuration>
 			</plugin>
-			<plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.tomcat.maven</groupId> -->
+<!-- 				<artifactId>tomcat7-maven-plugin</artifactId> -->
+<!-- 				<dependencies> -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>org.jasig.cas.client</groupId> -->
+<!-- 						<artifactId>cas-client-core</artifactId> -->
+<!-- 						<version>${cas-client-version}</version> -->
+<!-- 						<exclusions> -->
+<!-- 							<exclusion> -->
+<!-- 								<groupId>javax.servlet</groupId> -->
+<!-- 								<artifactId>servlet-api</artifactId> -->
+<!-- 							</exclusion> -->
+<!-- 						</exclusions> -->
+<!-- 					</dependency> -->
+<!-- 					</dependencies> -->
+<!-- 			</plugin> -->
+
+<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.jasig.cas.client</groupId>
+						<artifactId>cas-client-core</artifactId>
+						<version>${cas-client-version}</version>
+						<exclusions>
+							<exclusion>
+								<groupId>javax.servlet</groupId>
+								<artifactId>servlet-api</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>commons-codec</groupId>
+						<artifactId>commons-codec</artifactId>
+						<version>1.4</version>
+						<scope>compile</scope>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
+					<port>${tomcat.port}</port>
+					<httpsPort>${tomcat.httpsPort}</httpsPort>
+					<keystorePass>changeit</keystorePass>
+					<keystoreFile>conf/localhost.keystore</keystoreFile>
+					<keystoreType>JKS</keystoreType>
+					<additionalConfigFilesDir>${project.build.directory}/tomcat-config</additionalConfigFilesDir>
+					<systemProperties>
+						<org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH>true</org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH>
+						<javax.net.ssl.trustStore>${project.build.directory}/tomcat/conf/localhost.truststore</javax.net.ssl.trustStore>
+						<javax.net.ssl.trustStorePassword>changeit</javax.net.ssl.trustStorePassword>
+						<eureka.config.dir>${project.build.directory}/eureka-config/eureka</eureka.config.dir>
+						<java.util.logging.config.file>${project.build.directory}/eureka-config/logging.properties</java.util.logging.config.file>
+					</systemProperties>
+					<webapps>
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>eureka-webapp</artifactId> -->
+<!-- 							<version>${project.version}</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp> -->
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>eureka-services</artifactId> -->
+<!-- 							<version>${project.version}</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp> -->
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>eureka-protempa-etl</artifactId> -->
+<!-- 							<version>${project.version}</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp> -->
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>cas-server</artifactId> -->
+<!-- 							<version>3.2.1</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp> -->
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>eurekaclinical-user-webapp</artifactId> -->
+<!-- 							<version>${user-webapp-version}</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp>           -->
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>eurekaclinical-user-service</artifactId> -->
+<!-- 							<version>${user-service-version}</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp> -->
+<!-- 						<webapp> -->
+<!-- 							<groupId>org.eurekaclinical</groupId> -->
+<!-- 							<artifactId>eurekaclinical-registry-service</artifactId> -->
+<!-- 							<version>${ec-registry-service-version}</version> -->
+<!-- 							<type>war</type> -->
+<!-- 							<asWebapp>true</asWebapp> -->
+<!-- 						</webapp>                                                                                   -->
+					</webapps>
+					<addContextWarDependencies>true</addContextWarDependencies>
+					<addWarDependenciesInClassloader>false</addWarDependenciesInClassloader>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
